@@ -1,0 +1,20 @@
+version: '3.1'
+services:
+  nginx:
+    restart: always
+    image: nginx
+    container_name: nginx-hugo
+    volumes:
+      - /data/docker/nginx/data:/etc/nginx/data
+      - /data/docker/nginx/ssl:/etc/nginx/ssl
+      - /data/docker/nginx/conf.d:/etc/nginx/conf.d
+      - /data/docker/nginx/log:/etc/nginx/log
+      - /data/docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+    environment:
+      VIRTUAL_HOST: xiali.press
+      LETSENCRYPT_HOST: xiali.press
+      LETSENCRYPT_EMAIL: lixajh@gmail.com
+networks:
+   default:
+     external:
+       name: ${NETWORK:-webproxy}
